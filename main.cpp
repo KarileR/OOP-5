@@ -44,6 +44,8 @@ int main(int argc, char** argv)
     tekstas1.set_Line_number(lineNR);
     tekstas1.isvesti_URL();
     tekstas1.isvesti_pasikartojancius();
+    tekstas1.isvesti_zodzius1();
+    tekstas1.isvesti_zodzius2();
 
    
 

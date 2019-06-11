@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream> 
+#include <vector>
 
 using std::string;
 using std::multimap;
@@ -28,7 +29,6 @@ class Tekstas
         std::map <string, int> dublicate;
         std::set <string> url;
 
-        
         int WordsSk;
         int LinesSK;
 
@@ -68,19 +68,109 @@ class Tekstas
             //zodis.erase (std::remove_if (zodis.begin(), zodis.end(), ispunct), zodis.end());
         }
 
-        void isvesti_zodzius()
+        void isvesti_zodzius1()
         {
             std::ofstream out("zodziai.txt"); 
-            for(it = visi_zodziai.begin(); it != visi_zodziai.end(); ++it)
+            // for(it = visi_zodziai.begin(); it != visi_zodziai.end(); ++it)
+            // {
+            //     // std::cout << it->first << "  ";
+            //     // std::cout << it->second << std::endl;
+
+            //     out << it->first << "  ";
+            //     out << it->second << std::endl;
+            // }
+            // cout << "Isvesti visi zodziai faile: " << "'zodziai.txt'" << endl;
+            int currentMax = 0;
+
+            for(auto it = dublicate.begin(); it != dublicate.end(); it++) 
             {
-                // std::cout << it->first << "  ";
-                // std::cout << it->second << std::endl;
 
-                out << it->first << "  ";
-                out << it->second << std::endl;
-
-                cout << "Isvesti visi zodziai faile: " << "'zodziai.txt'" << endl;
+                if (it->second > currentMax) 
+                {
+                    //arg_max = it->first;
+                    currentMax = it->second;
+                }
             }
+            //out << currentMax ;
+            
+            for(int n = 2; n <= currentMax; n++)
+            {   
+                out << "Zodziai, kurie pasikartojo " << n << " kartus:" << endl;
+
+                for(auto it = dublicate.begin(); it != dublicate.end(); it++) 
+                {
+                    // for(int n = 1; n <= currentMax; n++)
+                    // {
+                        //out << "Zodziai pasikartojo " << 3 << "kartu:" << endl;
+                        if (it->second == n) 
+                        {
+                            out << left << setfill(' ') << setw(19) << it->first << endl;
+                            //out << left << setfill(' ') << setw(25) << it->second;
+                        }
+                 }
+
+                 out << endl;
+                 out << endl;
+            }
+
+        cout << "Isvesti visi zodziai faile: " << "'zodziai.txt'" << endl;
+
+        }
+
+
+        void isvesti_zodzius2()
+        {
+            int currentMax = 0;
+
+            for(auto it = dublicate.begin(); it != dublicate.end(); it++) 
+            {
+
+                if (it->second > currentMax) 
+                {
+                    currentMax = it->second;
+                }
+            }
+
+            std::ofstream outt("zodziai2.txt");
+
+
+                    for(int n = 2; n <= currentMax; n++)
+                    {
+                        outt << left << setfill(' ') << setw(20) << n ;
+                    }
+            outt << endl;
+
+            
+
+            // for(auto it = dublicate.begin(); it != dublicate.end(); it++) 
+            //     {
+            //         outt << left << setfill(' ') << setw(20) << it->first << " ";
+            //     }
+
+
+
+
+            // for(int n = 2; n <= currentMax; n++)
+            // {   
+                for(auto it = dublicate.begin(); it != dublicate.end(); it++) 
+                {
+                    // for(int n = 2; n <= currentMax; n++)
+                    // { 
+                        if (it->second == 2) 
+                        {
+                            outt << left << setfill(' ') << setw(19) << it->first << endl;
+                        }
+                    //}
+                }
+                outt << endl;
+            
+
+
+
+
+            cout << "Isvesti visi zodziai faile: " << "'zodziai2.txt'" << endl;
+
+
         }
         
         void CountWords()
